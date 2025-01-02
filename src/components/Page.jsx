@@ -62,9 +62,9 @@ const PolynomialGraph = () => {
   };
 
   return (
-    <Card className="w-full max-w-4xl">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Graph</CardTitle>
+    <Card style={{display: "flex", height: "100vh"}}>
+        <CardHeader style={{width: "20%"}}>
+          <CardTitle>Gradient Descent Graph: Loss vs. Weight 1</CardTitle>
           <div>
             <Input
                 type="text"
@@ -89,8 +89,8 @@ const PolynomialGraph = () => {
           </div>  
         </CardHeader>
 
-        <CardContent className="mt-4">
-          <ResponsiveContainer height="100%" aspect={1}>
+        <CardContent style={{maxHeight: "100vh"}}>
+          <ResponsiveContainer aspect={1}>
             <LineChart data={generatePoints()} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
