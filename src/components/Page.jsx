@@ -110,13 +110,15 @@ const PolynomialGraph = () => {
                 formatter={(value) => value.toFixed(2)}
                 labelFormatter={(value) => `x: ${value.toFixed(1)}`}
               /> */}
-              {isVisible && (<Line
+              <Line
                 type="monotone"
                 dataKey="y"
                 stroke="#2563eb"
                 dot={false}
                 strokeWidth={2}
-              />)}
+                hide={!isVisible}
+                isAnimationActive={false}
+              />
 
               {addedPoints.map((point, idx) => 
                   <Line
