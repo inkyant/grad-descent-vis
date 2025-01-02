@@ -63,20 +63,27 @@ const ModalForm = ({newWeight, addPoints, resetText}) => {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="p-4">
-            <p className="mb-4">Your neural network has weights {newWeight} and {WEIGHT_2}, your inputs are {input1} and {input2} with an expect value of {expected.toFixed(1)}. Enter the loss for these weights:</p>
-            <Input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Enter your text here"
-              className="w-full"
-            />
+            {(!isNaN(newWeight) && newWeight > -6 && newWeight < 6) ? 
+                <>
+                <p className="mb-4">Your neural network has weights {newWeight} and {WEIGHT_2}, your inputs are {input1} and {input2} with an expect value of {expected.toFixed(1)}. Enter the loss for these weights:</p>
+                <Input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Enter calculated loss here"
+                  className="w-full"
+                />  
+                </>
+              : 
+                <p className="mb-4">Sorry, that weight is invalid.</p>
+            }
+
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit">Submit</Button>
+            {(!isNaN(newWeight) && newWeight > -6 && newWeight < 6) && <Button type="submit">Submit</Button>}
           </DialogFooter>
         </form>
       </DialogContent>

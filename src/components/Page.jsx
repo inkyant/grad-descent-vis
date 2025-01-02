@@ -52,8 +52,8 @@ const PolynomialGraph = () => {
             >
               <p>Add</p>
             </Button> */}
-            <ModalForm newWeight={parseFloat(newWeight)} addPoints={(pts) => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")}></ModalForm>
-          </div>  
+            <ModalForm newWeight={Number(newWeight)} addPoints={(pts) => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")}></ModalForm>
+          </div>
         </CardHeader>
 
         <CardContent style={{maxHeight: "100vh", padding: 0, aspectRatio: 1}}>
