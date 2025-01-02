@@ -19,13 +19,21 @@ enum IsCorrectState {
   INCORRECT
 }
 
-const ModalForm = ({newWeight, addPoints, resetText}: {newWeight: number, addPoints: (pts: {x: number, y:number, visible?: boolean}[]) => void, resetText:  () => void}) => {
+const ModalForm = ({newWeight, addPoints, resetText, revealGraph}: {newWeight: number, addPoints: (pts: {x: number, y:number, visible?: boolean}[]) => void, resetText: () => void, revealGraph: (v: boolean) => void}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [isCorrect, setIsCorrect] = useState<IsCorrectState>(IsCorrectState.NO_INPUT);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (inputValue === "REVEALME") {
+      revealGraph(true)
+      setIsOpen(false)
+      setIsCorrect(IsCorrectState.NO_INPUT)
+      resetText()
+      setInputValue('')
+      return
+    }
     if (isCorrect == IsCorrectState.CORRECT) return;
 
     const y_val = calcY(newWeight)
@@ -80,11 +88,29 @@ const ModalForm = ({newWeight, addPoints, resetText}: {newWeight: number, addPoi
           <div className="p-4">
             {(!isNaN(newWeight) && newWeight >= -6 && newWeight <= 6) ? 
                 <>
-                <p className="mb-4">You entered a weight of: {newWeight}. <br />
-                                    Your weights are now {newWeight} and {WEIGHT_2}, <br /> 
-                                    Your inputs are: {input1} and {input2}, <br />
-                                    With an expected value of {expected.toFixed(1)}. <br />
-                                    Enter the loss for these weights:</p>
+                <p className='mb-2'>
+                  You entered a weight of: {newWeight}. <br />
+                  Your weights are now {newWeight} and {WEIGHT_2}, <br /> 
+                  Your inputs are: {input1} and {input2}, <br />
+                  With an expected value of {expected.toFixed(1)}.<br />
+                  Use your whiteboard to draw the neural network and calculate the output and loss. 
+                </p>
+                {/* <svg width={300} height={150} fill="white" strokeWidth={3}>
+                  <path d="M 20 40 L 40 40" stroke="black"/>
+                  <path d="M 20 120 L 40 120" stroke="black"/>
+                  <path d="M 80 40 L 140 80" stroke="black"/>
+                  <path d="M 80 120 L 140 80" stroke="black"/>
+                  <path d="M 180 80 L 200 80" stroke="black"/>
+
+                  <g transform="translate(60 40)"><circle r="20" stroke="red" /></g>
+                  <g transform="translate(60 120)"><circle r="20" stroke="red" /></g>
+                  <g transform="translate(160 80)"><circle r="20" stroke="red" /></g>
+
+                  <text x={input1 < 0 ? 4 : 9} y="45" fill="black">{input1}</text>
+                  <text x={input2 < 0 ? 4 : 9} y="125" fill="black">{input2}</text>
+                  <text x="203" y="84" fill="black">output</text>
+                </svg> */}
+                <p className='mb-2'>Enter the loss here:</p>
                 <Input
                   type="text"
                   value={inputValue}

@@ -9,7 +9,7 @@ import { generatePoints } from '@/lib/polynomial'
 
 const PolynomialGraph = () => {
 
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [addedPoints, setAddedPoints] = useState<{x: number, y: number, visible?: boolean}[][]>([])
   const [newWeight, setNewWeight] = useState("")
 
@@ -37,13 +37,13 @@ const PolynomialGraph = () => {
                 placeholder="Enter new weight (-6 to 6)"
                 className="w-40"
               />
-            <Button 
+            {/* <Button 
               variant="outline"
               size="icon"
               onClick={() => setIsVisible(!isVisible)}
             >
               {isVisible ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-            </Button>
+            </Button> */}
             {/* <Button 
               variant="outline"
               size="icon"
@@ -51,7 +51,7 @@ const PolynomialGraph = () => {
             >
               <p>Add</p>
             </Button> */}
-            <ModalForm newWeight={newWeight === "" ? NaN : Number(newWeight)} addPoints={pts => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")}></ModalForm>
+            <ModalForm newWeight={newWeight === "" ? NaN : Number(newWeight)} addPoints={pts => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")} revealGraph={setIsVisible}></ModalForm>
           </div>
         </CardHeader>
 
