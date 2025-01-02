@@ -16,12 +16,21 @@ const WEIGHT_2 = 4
 const ModalForm = ({newWeight, addPoints, resetText}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [isCorrect, setIsCorrect] = useState(-1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted value:', inputValue, "og value:", newWeight);
 
     const y_val = calcY(newWeight)
+
+    if (Number(inputValue) - y_val >= 0.1) {
+      setInputValue('');
+      setIsCorrect(false)
+      return
+    }
+    setIsCorrect(true)
+
     const slope = calcSlope(newWeight)
 
     const L = 0.5
@@ -65,7 +74,7 @@ const ModalForm = ({newWeight, addPoints, resetText}) => {
           <div className="p-4">
             {(!isNaN(newWeight) && newWeight > -6 && newWeight < 6) ? 
                 <>
-                <p className="mb-4">Your neural network has weights {newWeight} and {WEIGHT_2}, your inputs are {input1} and {input2} with an expect value of {expected.toFixed(1)}. Enter the loss for these weights:</p>
+                <p className="mb-4">Your neural network has weights {newWeight} and {WEIGHT_2}, your inputs are {input1} and {input2} with an expected value of {expected.toFixed(1)}. Enter the loss for these weights:</p>
                 <Input
                   type="text"
                   value={inputValue}
@@ -78,6 +87,10 @@ const ModalForm = ({newWeight, addPoints, resetText}) => {
                 <p className="mb-4">Sorry, that weight is invalid.</p>
             }
 
+            {isCorrect == -1 ? <></> : (
+              isCorrect ? <p style={{color: "green"}}>Correct!</p> : <p style={{color: "red"}}>Sorry, that's not right.</p>
+            )}
+            
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
