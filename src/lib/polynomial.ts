@@ -9,7 +9,7 @@ export const calcY = (x: number) => {
 
 export const calcSlope = (x: number) => {
     return derivCoefficients.reduce((sum, coeff, power) => {
-      return sum + coeff * Math.pow(x, coefficients.length - 1 - power);
+      return sum + coeff * Math.pow(x, derivCoefficients.length - 1 - power);
     }, 0);
 }
 
