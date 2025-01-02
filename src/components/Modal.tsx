@@ -90,9 +90,13 @@ const ModalForm = ({newWeight, addPoints, resetText, revealGraph}: {newWeight: n
                 <>
                 <p className='mb-2'>
                   You entered a weight of: {newWeight}. <br />
-                  Your weights are now {newWeight} and {WEIGHT_2}, <br /> 
+                  Your weights are now {newWeight} and {WEIGHT_2}.
+                </p> 
+                <p className='mb-2'>
                   Your inputs are: {input1} and {input2}, <br />
-                  With an expected value of {expected.toFixed(1)}.<br />
+                  With an expected value of {expected.toFixed(1)}.
+                </p>
+                <p className='mb-2'>
                   Use your whiteboard to draw the neural network and calculate the output and loss. 
                 </p>
                 {/* <svg width={300} height={150} fill="white" strokeWidth={3}>

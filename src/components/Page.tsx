@@ -15,10 +15,12 @@ const PolynomialGraph = () => {
 
   const CustomizedDot = ({ cx, cy, stroke, payload, value }: {cx: number, cy: number, stroke: number, payload: {visible: boolean}, value: number}) => {
   
+    const r = 5
+
     if (payload.visible) {
       return (
-        <svg x={cx - 4} y={cy - 4} width={8} height={8} fill="white">
-          <g transform="translate(4 4)"><circle r="4" fill="red" /></g>
+        <svg x={cx - r} y={cy - r} width={2*r} height={2*r} fill="white">
+          <g transform={"translate("+r+" "+r+")"}><circle r={r} fill="red" /></g>
         </svg>
       );
     }
@@ -26,16 +28,16 @@ const PolynomialGraph = () => {
   };
 
   return (
-    <Card style={{display: "flex", height: "100vh"}}>
-        <CardHeader style={{width: "20%"}}>
-          <CardTitle>Gradient Descent Graph: Loss vs. Weight 1</CardTitle>
+    <Card style={{display: "flex", height: "100vh", paddingBottom: "5vh", justifyContent: "center"}}>
+        <CardHeader style={{width: "20%", padding: 0, marginTop: "auto", marginBottom: "auto", marginRight: "5%"}}>
+          <CardTitle>Gradient Descent Graph: <br /> Loss vs. Weight 1</CardTitle>
           <div>
             <Input
                 type="text"
                 value={newWeight}
                 onChange={(e) => setNewWeight(e.target.value)}
-                placeholder="Enter new weight (-6 to 6)"
-                className="w-40"
+                placeholder="Enter new weight 1 (-6 to 6)"
+                className="mb-2 mt-2"
               />
             {/* <Button 
               variant="outline"
@@ -81,7 +83,7 @@ const PolynomialGraph = () => {
                 dataKey="y"
                 stroke="#2563eb"
                 dot={false}
-                strokeWidth={2}
+                strokeWidth={4}
                 hide={!isVisible}
                 isAnimationActive={false}
               />
@@ -95,6 +97,7 @@ const PolynomialGraph = () => {
                     yAxisId={0}
                     name="point"
                     stroke="#dc2626"
+                    strokeWidth={3.5}
                     dot={<CustomizedDot />}
                     isAnimationActive={false}
                     key={idx}

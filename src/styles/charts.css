@@ -5,3 +5,7 @@
 .recharts-label {
     margin-bottom: 100px;
 }
+
+.recharts-surface {
+    height: 100vh !important;
+}
