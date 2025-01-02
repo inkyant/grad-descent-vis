@@ -70,6 +70,10 @@ const ModalForm = ({newWeight, addPoints, resetText, revealGraph}: {newWeight: n
 
       const loss = calcY(newWeight)
       const expected = newWeight*input1 + WEIGHT_2*input2 + (Math.random() > 0.5 ? loss : -loss)
+
+      if (newWeight == 5) {
+        return [3.0, -2.0, 9.5]
+      }
       return [input1, input2, expected]
     },
     [isOpen]
