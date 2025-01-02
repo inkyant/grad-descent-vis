@@ -10,11 +10,10 @@ import { generatePoints } from '@/lib/polynomial'
 const PolynomialGraph = () => {
 
   const [isVisible, setIsVisible] = useState(true);
-  const [addedPoints, setAddedPoints] = useState([])
+  const [addedPoints, setAddedPoints] = useState<{x: number, y: number, visible?: boolean}[][]>([])
   const [newWeight, setNewWeight] = useState("")
 
-  const CustomizedDot = (props) => {
-    const { cx, cy, stroke, payload, value } = props;
+  const CustomizedDot = ({ cx, cy, stroke, payload, value }: {cx: number, cy: number, stroke: number, payload: {visible: boolean}, value: number}) => {
   
     if (payload.visible) {
       return (
@@ -52,7 +51,7 @@ const PolynomialGraph = () => {
             >
               <p>Add</p>
             </Button> */}
-            <ModalForm newWeight={newWeight === "" ? NaN : Number(newWeight)} addPoints={(pts) => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")}></ModalForm>
+            <ModalForm newWeight={newWeight === "" ? NaN : Number(newWeight)} addPoints={pts => setAddedPoints([pts, ...addedPoints])} resetText={() => setNewWeight("")}></ModalForm>
           </div>
         </CardHeader>
 
